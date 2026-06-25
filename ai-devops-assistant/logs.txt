@@ -1,0 +1,11 @@
+Linux is an open-source operating system based on Unix. It is widely used for servers, desktops, smartphones, and other devices. The core component of Linux is the **Linux kernel**, which manages hardware resources and allows software to interact with the hardware.
+
+Key points about Linux:
+- **Open Source:** Its source code is freely available, allowing anyone to view, modify, and distribute it.
+- **Kernel:** The Linux kernel was originally created by Linus Torvalds in 1991.
+- **Distributions:** There are many variations of Linux called *distributions* (or distros), such as Ubuntu, Fedora, Debian, and CentOS, tailored for different uses.
+- **Multi-user & multitasking:** Linux supports multiple users and can run many processes simultaneously.
+- **Security:** It is known for strong security features.
+- **Command Line Interface:** Offers powerful command-line tools but also supports graphical user interfaces (GUIs).
+
+Linux is popular in web servers, supercomputers, embedded systems, and increasingly in personal computers.

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<link rel="stylesheet" href="/static/css/log-analyzer.css" />
+<body>
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 16 16"><path d="M2 3h12v2H2zM2 7h8v2H2zM2 11h10v2H2z"/></svg>
+  </div>
+  <h1>Log Analyzer</h1>
+  <span class="badge">v1.0</span>
+</header>
+
+<div class="main">
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-label">Paste Logs</span>
+      <div class="btn-group">
+        <button class="btn" onclick="loadSample()">Load sample</button>
+        <button class="btn" onclick="clearAll()">Clear</button>
+        <button class="btn btn-primary" onclick="analyze()">Analyze →</button>
+      </div>
+    </div>
+    <textarea id="logInput" placeholder="Paste your JS, server, or browser console logs here..."></textarea>
+  </div>
+
+  <div class="results-panel" id="resultsPanel">
+    <div id="emptyState" class="empty-state">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+          <rect x="9" y="3" width="6" height="4" rx="1"/>
+          <path d="M9 12h6M9 16h4"/>
+        </svg>
+      </div>
+      <p>No logs analyzed yet</p>
+      <span>Paste your logs on the left and click Analyze</span>
+    </div>
+
+    <div id="resultsView" style="display:none; flex-direction:column; flex:1; overflow:hidden;">
+      <div class="summary-bar">
+        <div class="stat"><div class="stat-dot dot-red"></div><div><div class="stat-val" id="cntError" style="color:var(--red)">0</div><div class="stat-key">Errors</div></div></div>
+        <div class="stat"><div class="stat-dot dot-amber"></div><div><div class="stat-val" id="cntWarn" style="color:var(--amber)">0</div><div class="stat-key">Warnings</div></div></div>
+        <div class="stat"><div class="stat-dot dot-green"></div><div><div class="stat-val" id="cntInfo" style="color:var(--green)">0</div><div class="stat-key">Info</div></div></div>
+        <div class="stat"><div class="stat-dot dot-cyan"></div><div><div class="stat-val" id="cntTotal" style="color:var(--cyan)">0</div><div class="stat-key">Total</div></div></div>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active-all" data-filter="all" onclick="setFilter('all', this)">All</button>
+        <button class="filter-btn" data-filter="error" onclick="setFilter('error', this)">Errors</button>
+        <button class="filter-btn" data-filter="warn" onclick="setFilter('warn', this)">Warnings</button>
+        <button class="filter-btn" data-filter="info" onclick="setFilter('info', this)">Info</button>
+        <button class="filter-btn" data-filter="debug" onclick="setFilter('debug', this)">Debug</button>
+        <div style="flex:1"></div>
+        <input class="search-input" id="searchInput" type="text" placeholder="Search..." oninput="renderFiltered()" />
+      </div>
+
+      <div class="log-list" id="logList"></div>
+
+      <div class="detail-panel" id="detailPanel">
+        <div class="detail-title">Entry detail</div>
+        <div id="detailContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/static/js/log-analyzer.js"></script>
+</body>
+</html>
